@@ -30,7 +30,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - output.txt
+            - pipeline_id_output.txt
   promote_to_production:
     docker:
       - image: amazon/aws-cli
