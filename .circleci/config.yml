@@ -22,11 +22,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: query and save the id to a file that we can persist to the workspace
-        command: |
-          aws cloudformation \
-          list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-          --no-paginate --output text > pipeline_id_output.txt
+          name: query and save the id to a file that we can persist to the workspace
+          command: |
+            aws cloudformation \
+            list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
+            --no-paginate --output text > pipeline_id_output.txt
       - persist_to_workspace:
           root: ~/
           paths:
