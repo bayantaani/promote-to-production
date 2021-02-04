@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: query and save the id to a file that we can persist to the workspace
+          name: Query and save the id to a file that we can persist to the workspace
           command: |
             aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
@@ -37,7 +37,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: execute cloudfront.yml
+          name: Execute cloudfront.yml 
           command: |
             aws cloudformation deploy \
             --template-file cloudfront.yml \
