@@ -20,9 +20,9 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - name: query and save the id to a file that we can persist to the workspace
       - checkout
       - run:
+        name: query and save the id to a file that we can persist to the workspace
         command: |
           aws cloudformation \
           list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
@@ -35,9 +35,9 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - name: execute cloudfront.yml
       - checkout
       - run:
+          name: execute cloudfront.yml
           command: |
             aws cloudformation deploy \
             --template-file cloudfront.yml \
@@ -47,11 +47,11 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - name: destroy the previous production version's S3 bucket and CloudFormation stack
       - attach_workspace:
           at: ~/
       - checkout
       - run:
+          name: destroy the previous production version's S3 bucket and CloudFormation stack
           command: |
             OldPipelineID=`more pipeline_id_output.txt`
             aws s3 rm "s3://${OldPipelineID}" --recursive
