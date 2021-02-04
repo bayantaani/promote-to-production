@@ -21,6 +21,8 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run: yum install -y tar
+      - run: yum install -y gzip
       - run:
           name: Query and save the id to a file that we can persist to the workspace
           command: |
