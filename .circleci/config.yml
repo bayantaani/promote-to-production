@@ -28,7 +28,7 @@ jobs:
           command: |
             aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-            --no-paginate --output text > pipeline_id_output.txt
+            --no-paginate --output text > ~/pipeline_id_output.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -55,7 +55,7 @@ jobs:
       - run:
           name: destroy the previous production version's S3 bucket and CloudFormation stack
           command: |
-            OldPipelineID=`more pipeline_id_output.txt`
+            OldPipelineID=`more ~/pipeline_id_output.txt`
             aws s3 rm "s3://${OldPipelineID}" --recursive
             aws cloudformation delete-stack --stack-name "${CIRCLE_WORKFLOW_ID:0:7}"
 workflows:
