@@ -8,8 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy new bucket (${CIRCLE_WORKFLOW_ID:0:7} takes the first 7 digits of ${CIRCLE_WORKFLOW_ID})
+          name: Deploy new bucket
           command: |
+            echo ${CIRCLE_WORKFLOW_ID:0:7}
             aws cloudformation deploy \
             --template-file bucket.yml \
             --stack-name "${CIRCLE_WORKFLOW_ID:0:7}" \
