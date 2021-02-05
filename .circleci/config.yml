@@ -11,7 +11,7 @@ jobs:
           name: Deploy new bucket
           command: |
             aws cloudformation deploy \
-            --template-file .circleci/bucket.yml \
+            --template-file bucket.yml \
             --stack-name "${CIRCLE_WORKFLOW_ID:0:7}" \
             --parameter-overrides NAME="${CIRCLE_WORKFLOW_ID:0:7}"
       - run: aws s3 sync . s3://"${CIRCLE_WORKFLOW_ID:0:7}" --delete
@@ -52,6 +52,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - checkout
+      - run: yum install -y tar
+      - run: yum install -y gzip
       - run:
           name: destroy the previous production version's S3 bucket and CloudFormation stack
           command: |
