@@ -45,7 +45,7 @@ jobs:
             aws cloudformation deploy \
             --template-file cloudfront.yml \
             --stack-name production-distro \
-            --parameter-overrides PipelineID="b-${CIRCLE_WORKFLOW_ID}"
+            --parameter-overrides PipelineID="b-${CIRCLE_WORKFLOW_ID:0:6}"
   clean_up_old_front_end:
     docker:
       - image: amazon/aws-cli
